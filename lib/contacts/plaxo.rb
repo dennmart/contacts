@@ -34,10 +34,18 @@ class Contacts
       elsif code == '200'
         @contacts = []
         doc.elements.each('//contact') do |cont|
-          name  = cont.elements['fullName'].nil? ? cont.elements['displayName'].text : cont.elements['fullName'].text
-          email = cont.elements['email1'].text
-          @contacts << [name, email]
-        end.compact
+          name = if cont.elements['fullName']
+            cont.elements['fullName'].text
+          elsif cont.elements['displayName']
+            cont.elements['displayName'].text
+          end
+          email = if cont.elements['email1']
+            cont.elements['email1'].text
+          end
+          if name || email
+            @contacts << [name, email]
+          end
+        end
         @contacts
       else
         raise ConnectionError, PROTOCOL_ERROR
@@ -53,7 +61,7 @@ end # Contacts
 
 
 # sample contacts responses
-'
+=begin
 Bad email
 =========
 <?xml version="1.0" encoding="utf-8" ?>
@@ -119,5 +127,4 @@ Success
   <editCounter>3</editCounter>
   
 </ns1:GetContactsResponse>
-
-'
+=end

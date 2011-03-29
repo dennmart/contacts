@@ -1,12 +1,12 @@
 == Welcome to Contacts
 
-Contacts is a universal interface to grab contact list information from various providers including Hotmail, Gmail and Yahoo.
+Contacts is a universal interface to grab contact list information from various providers including Hotmail, AOL, Gmail, Plaxo and Yahoo.
 
 == Download
 
 * gem install contacts
-* http://rubyforge.org/projects/contacts
-* svn co svn://rubyforge.org/var/svn/contacts
+* http://github.com/cardmagic/contacts
+* git clone git://github.com/cardmagic/contacts.git
 
 == Background
 
@@ -26,6 +26,12 @@ For a long time, the only way to get a list of contacts from your free online em
 
 Notice there are three ways to use this library so that you can limit the use as much as you would like in your particular application. The Contacts.guess method will automatically concatenate all the address book contacts from each of the successful logins in the case that a username password works across multiple services.
 
+== Captcha error
+
+If there are too many failed attempts with the gmail login info, Google will raise a captcha response. To integrate the captcha handling, pass in the token and response via:
+
+  Contacts::Gmail.new(login, password, :captcha_token => params[:captcha_token], :captcha_response => params[:captcha_response]).contacts
+
 == Examples
 
 See the examples/ directory.
@@ -38,6 +44,14 @@ See the examples/ directory.
 
 * Britt Selvitelle from Twitter (mailto:anotherbritt@gmail.com) - http://twitter.com
 * Tony Targonski from GigPark (mailto:tony@gigpark.com) - http://gigpark.com
+* Waheed Barghouthi from Watwet (mailto:waheed.barghouthi@gmail.com) - http://watwet.com
+* Glenn Sidney from Glenn Fu (mailto:glenn@glennfu.com) - http://glennfu.com
+* Brian McQuay from Onomojo (mailto:brian@onomojo.com) - http://onomojo.com
+* Adam Hunter (mailto:adamhunter@me.com) - http://adamhunter.me/
+* Glenn Ford (mailto:glenn@glennfu.com) - http://www.glennfu.com/
+* Leonardo Wong (mailto:mac@boy.name)
+* Rusty Burchfield
+* justintv
 
 This library is released under the terms of the BSD.
 
